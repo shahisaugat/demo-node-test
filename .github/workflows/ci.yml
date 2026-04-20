@@ -12,15 +12,18 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6 # Updated version
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6 # Updated version
         with:
-          node-version: 25
+          node-version: 22 # Use the stable LTS (22) or 24/25 if required
 
       - name: Install dependencies
-        run: npm Install
+        run: npm install # Lowercase 'i'
 
       - name: Run app (basic check)
-        run: node src/index.js &
+        run: |
+          node src/index.js & 
+          sleep 5 
+          kill $! # This starts it, waits 5 seconds, then closes it cleanly
